@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { menuList } from "../../assets/assets";
+import { ScrollContext } from "../../context/ScrollContext";
 
 const Menu = ({ category, setCategory }) => {
+  const { menuRef } = useContext(ScrollContext);
+
   console.log(category);
   return (
     <div className="flex flex-col gap-6 px-4 w-4/5 ml-36">
-      <h1 className="text-2xl font-semibold text-center">Explore our menu</h1>
+      <h1 ref={menuRef} className="text-2xl font-semibold text-center">
+        Explore our menu
+      </h1>
       <p className="text-center text-gray-500">
         Craving something delicious? Explore our menu and pick your perfect
         bite!

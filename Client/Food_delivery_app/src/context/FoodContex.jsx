@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 export const FoodContext = createContext(null);
 const FoodContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
@@ -29,15 +28,32 @@ const FoodContextProvider = (props) => {
       return updated;
     });
   };
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+
+  const totalAmount = (promoCode) => {
+    let calculate = 0;
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        let findItem = food_list.find(
+          (prod) => prod.id === item || prod.id === Number(item)
+        );
+        calculate += findItem.price * cartItems[item];
+      }
+    }
+    if (promoCode === "SAVE10") {
+      calculate = calculate * 0.9;
+    }
+    return calculate;
+  };
+  // useEffect(() => {
+  //   console.log(cartItems);
+  // }, [cartItems]);
   const contextValue = {
     food_list,
     cartItems,
     setCartItems,
     addToCart,
     removeFromCart,
+    totalAmount,
   };
   return (
     <FoodContext.Provider value={contextValue}>

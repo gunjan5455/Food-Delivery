@@ -4,11 +4,14 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import FoodContextProvider from "./context/FoodContex.jsx";
+import ScrollContextProvider from "./context/ScrollContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <FoodContextProvider>
-      <App />
-    </FoodContextProvider>
+    <ScrollContextProvider>
+      <FoodContextProvider>
+        <App />
+      </FoodContextProvider>
+    </ScrollContextProvider>
   </StrictMode>
 );

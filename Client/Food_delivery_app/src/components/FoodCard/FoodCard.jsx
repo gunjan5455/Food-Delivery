@@ -1,32 +1,3 @@
-// import React from "react";
-
-// const FoodCard = ({ item }) => {
-//   return (
-//     <div className="w-60 bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-//       <img
-//         src={item.img}
-//         alt={item.name}
-//         className="h-40 w-full object-cover"
-//       />
-//       <div className="p-4">
-//         <h3 className="text-lg font-semibold">{item.name}</h3>
-//         <p className="text-sm text-gray-600 mt-1">{item.description}</p>
-//         <div className="mt-3 flex justify-between items-center">
-//           <span className="text-md font-bold text-green-600">
-//             ${item.price}
-//           </span>
-//           <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">
-//             {item.category}
-//           </span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FoodCard;
-// // name,description,price,image,category
-
 import React, { useContext, useState } from "react";
 import cartIcon from "../../assets/cart.png";
 // Import ToastContainer

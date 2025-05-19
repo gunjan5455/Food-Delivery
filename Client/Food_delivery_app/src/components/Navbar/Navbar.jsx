@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import cartIcon from "../../assets/cart.png";
 import searchIcon from "../../assets/food search.png";
 import userIcon from "../../assets/user.png";
 import { Link, useNavigate } from "react-router-dom";
+import { ScrollContext } from "../../context/ScrollContext";
 const Navbar = ({ isLoggedin }) => {
+  const { scrollTo, menuRef, aboutRef, contactRef, topRef } =
+    useContext(ScrollContext);
   const navigate = useNavigate();
   return (
-    <nav className=" w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md">
+    <nav
+      ref={topRef}
+      className=" w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md"
+    >
       {/* <h1 className="text-2xl font-bold text-gray-800">FOOD DILEVERY APP</h1> */}
       <Link to={"/"}>
         <h1 className="text-3xl font-bold text-orange-500 mb-3">
@@ -14,20 +20,29 @@ const Navbar = ({ isLoggedin }) => {
         </h1>
       </Link>
       {/* <div className="flex items-center justify-center bg-yellow-50 cursor-pointer">
-        <img src={logo} alt="logo" className="w-38 h-14 " />
-      </div> */}
+          <img src={logo} alt="logo" className="w-38 h-14 " />
+        </div> */}
       <ul className="flex space-x-6 text-gray-700 font-medium">
         <li className="hover:text-orange-400 cursor-pointer">
           <Link to="/">Home</Link>
         </li>
-        <li className="hover:text-orange-400 cursor-pointer">
-          <Link to="/menu">Menu</Link>
+        <li
+          onClick={() => scrollTo(menuRef)}
+          className="hover:text-orange-400 cursor-pointer"
+        >
+          Menu
         </li>
-        <li className="hover:text-orange-400 cursor-pointer">
-          <Link to="/contact">Contact Us</Link>
+        <li
+          onClick={() => scrollTo(contactRef)}
+          className="hover:text-orange-400 cursor-pointer"
+        >
+          Contact Us
         </li>
-        <li className="hover:text-orange-400 cursor-pointer">
-          <Link to="/about">About</Link>
+        <li
+          onClick={() => scrollTo(aboutRef)}
+          className="hover:text-orange-400 cursor-pointer"
+        >
+          About
         </li>
       </ul>
 

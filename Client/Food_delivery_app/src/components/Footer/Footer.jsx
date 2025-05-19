@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { ScrollContext } from "../../context/ScrollContext";
+
 const Footer = () => {
+  const { aboutRef, contactRef } = useContext(ScrollContext);
   return (
     <footer className="bg-zinc-900 text-white py-10 mt-12">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand Info */}
         <div>
           <Link to={"/"}>
-            <h2 className="text-3xl font-bold text-orange-500 mb-3">
+            <h2
+              ref={aboutRef}
+              className="text-3xl font-bold text-orange-500 mb-3"
+            >
               F00D DELiVERY
             </h2>
           </Link>
@@ -60,12 +66,13 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">GET IN TOUCH</h3>
-          <ul className="text-sm text-gray-300 space-y-2">
+          <h3 className="text-lg font-semibold mb-3 ">GET IN TOUCH</h3>
+          <ul ref={contactRef} className="text-sm text-gray-300 space-y-2">
             <li>+91 6565565656633</li>
             <li>contact@fooddeliveryapp.com</li>
           </ul>
         </div>
+
         <div className="border-t border-gray-600 mt-10 pt-4 text-center text-sm text-gray-400">
           Copyright 2025 ©{" "}
           <Link to={"/"}>
