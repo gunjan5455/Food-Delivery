@@ -6,7 +6,7 @@ import { ScrollContext } from "../../context/ScrollContext";
 const Footer = () => {
   const { aboutRef, contactRef } = useContext(ScrollContext);
   return (
-    <footer className="bg-zinc-900 text-white py-10 mt-12">
+    <footer className="bg-zinc-900 text-white py-10 mt-12 w-full">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand Info */}
         <div>
