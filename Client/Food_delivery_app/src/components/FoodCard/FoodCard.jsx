@@ -4,19 +4,8 @@ import cartIcon from "../../assets/cart.png";
 import { FoodContext } from "../../context/FoodContex";
 
 const FoodCard = ({ item }) => {
-  // const [itemCount, setItemCount] = useState(0);
-  const { cartItems, addToCart, removeFromCart } = useContext(FoodContext);
-  // const handlPClick = () => {
-  //   setItemCount(itemCount + 1);
-  //   console.log(itemCount);
-  //   toast.success(`${itemCount} items in your FoodCart`);
-  // };
-  // const handlMClick = () => {
-  //   if (itemCount > 0) {
-  //     setItemCount(itemCount - 1);
-  //     toast.warning(`${itemCount} items in your FoodCart`);
-  //   }
-  // };
+  const { cartItems, addToCart, removeFromCart, url } = useContext(FoodContext);
+
   return (
     <div
       className="w-full max-w-xs bg-white rounded-xl shadow-md overflow-hidden
@@ -24,7 +13,7 @@ const FoodCard = ({ item }) => {
     >
       <div className="relative">
         <img
-          src={item.img}
+          src={url + "/images/" + item.image}
           alt={item.name}
           className="h-40 w-full object-cover rounded-t-xl"
         />
@@ -45,19 +34,19 @@ const FoodCard = ({ item }) => {
 
         <div className="flex items-center justify-between gap-2 mt-3">
           <button
-            onClick={() => removeFromCart(item.id)}
+            onClick={() => removeFromCart(item._id)}
             className="w-2/5 bg-orange-500 hover:bg-orange-400 text-white text-sm px-3 py-1 rounded-lg flex justify-center items-center gap-1"
           >
             <img src={cartIcon} alt="Remove" className="w-4 h-4" />-
           </button>
-          {cartItems[item.id] > 0 && (
+          {cartItems[item._id] > 0 && (
             <span className="text-md font-semibold text-gray-800 w-6 text-center">
-              {cartItems?.[item.id] || 0}
+              {cartItems?.[item._id] || 0}
             </span>
           )}
 
           <button
-            onClick={() => addToCart(item.id)}
+            onClick={() => addToCart(item._id)}
             className="w-2/5 bg-orange-500 hover:bg-orange-400 text-white text-lg px-3 py-1 rounded-lg flex justify-center items-center gap-1"
           >
             <img src={cartIcon} alt="Add" className="w-4 h-4" />+

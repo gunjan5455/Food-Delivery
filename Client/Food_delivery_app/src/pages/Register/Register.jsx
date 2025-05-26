@@ -3,8 +3,36 @@ import { Eye, EyeOff } from "lucide-react";
 import registerIcon from "../../assets/register.png";
 import eye from "../../assets/eye.png";
 import eyeoff from "../../assets/eye off.png";
+import { axiosInstance } from "../../calls";
+import { toast } from "react-toastify";
 const Register = () => {
+  const url = "http://localhost:4000";
   const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post(`${url}/api/register`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      toast.success("Registration successful!");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "Registration failed");
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
@@ -12,12 +40,15 @@ const Register = () => {
           <img src={registerIcon} alt="register" className="w-20 h-20 " />
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={submitHandler}>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Name
             </label>
             <input
+              name="name"
+              value={data.name}
+              onChange={onChangeHandler}
               type="text"
               placeholder="John Doe"
               className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -28,6 +59,9 @@ const Register = () => {
               Email
             </label>
             <input
+              name="email"
+              value={data.email}
+              onChange={onChangeHandler}
               type="email"
               placeholder="example@email.com"
               className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -39,6 +73,9 @@ const Register = () => {
             </label>
             <div className="relative">
               <input
+                name="password"
+                value={data.password}
+                onChange={onChangeHandler}
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 className="mt-1 w-full px-4 py-2 pr-10 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

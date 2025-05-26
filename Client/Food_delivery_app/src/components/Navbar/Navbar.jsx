@@ -1,27 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import cartIcon from "../../assets/cart.png";
 import searchIcon from "../../assets/food search.png";
 import userIcon from "../../assets/user.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ScrollContext } from "../../context/ScrollContext";
-const Navbar = ({ isLoggedin }) => {
+import { FoodContext } from "../../context/FoodContex";
+
+const Navbar = () => {
   const { scrollTo, menuRef, aboutRef, contactRef, topRef } =
     useContext(ScrollContext);
+  const { token, setToken } = useContext(FoodContext);
   const navigate = useNavigate();
+
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+    setShowDropdown(false);
+  };
+
   return (
     <nav
       ref={topRef}
-      className=" w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md"
+      className="w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md relative"
     >
-      {/* <h1 className="text-2xl font-bold text-gray-800">FOOD DILEVERY APP</h1> */}
-      <Link to={"/"}>
+      <Link to="/">
         <h1 className="text-3xl font-bold text-orange-500 mb-3">
           F00D DELiVERY
         </h1>
       </Link>
-      {/* <div className="flex items-center justify-center bg-yellow-50 cursor-pointer">
-          <img src={logo} alt="logo" className="w-38 h-14 " />
-        </div> */}
+
       <ul className="flex space-x-6 text-gray-700 font-medium">
         <li className="hover:text-orange-400 cursor-pointer">
           <Link to="/">Home</Link>
@@ -46,33 +71,62 @@ const Navbar = ({ isLoggedin }) => {
         </li>
       </ul>
 
-      {isLoggedin ? (
-        <div className="flex items-center space-x-4">
+      {token ? (
+        <div className="flex items-center space-x-4 relative">
           <img
             src={searchIcon}
             alt="search"
             className="w-10 h-10 cursor-pointer"
           />
-          <Link to={"/cart"}>
+          <Link to="/cart">
             <img
               src={cartIcon}
               alt="cart"
               className="w-10 h-10 cursor-pointer"
-              // onClick={() => navigate("/cart")}
             />
           </Link>
-          <img
-            src={userIcon}
-            alt="user"
-            className="w-10 h-10 rounded-full cursor-pointer"
-          />
+
+          {/* Profile Dropdown Toggle */}
+          <div className="relative" ref={dropdownRef}>
+            <img
+              src={userIcon}
+              alt="user"
+              className="w-10 h-10 rounded-full cursor-pointer"
+              onClick={() => setShowDropdown((prev) => !prev)}
+            />
+
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-50">
+                <Link
+                  to="/profile"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => setShowDropdown(false)}
+                >
+                  Profile
+                </Link>
+                <Link
+                  to="/myorders"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => setShowDropdown(false)}
+                >
+                  Order
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div>
-          <button className="bg-yellow-50 text-orange-400 border-1 border-solid border-grey font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2 ">
+          <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
             <Link to="/register">sign up</Link>
           </button>
-          <button className="bg-yellow-50 text-orange-400 border-1 border-solid border-grey font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition">
+          <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition">
             <Link to="/login">sign in</Link>
           </button>
         </div>
