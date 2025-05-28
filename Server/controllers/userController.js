@@ -111,7 +111,7 @@ const onForget = async (req, res) => {
     await user.save();
     sendEmail(
       [user.email],
-      "Reset Password for Book my Show App",
+      "Reset Password for F00D DELiVERY App",
       OTPScript(user.name, user.email, otp)
     );
     return res.status(200).send({
@@ -147,7 +147,7 @@ const onResetPassword = async (req, res) => {
     });
   }
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hashSync(password, salt);
+  const hashedPassword = bcrypt.hashSync(password, salt);
 
   user.password = hashedPassword;
   user.otp = null;
