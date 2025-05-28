@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Update = ({ isLogged }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const url = "http://localhost:4000";
+  const url = "https://f00d-delivery-mern-bygunjan.onrender.com";
   const [image, setImage] = useState({ file: null, preview: null });
   const [originalData, setOriginalData] = useState(null);
   const [data, setData] = useState({

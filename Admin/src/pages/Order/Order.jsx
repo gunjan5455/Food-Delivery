@@ -54,7 +54,7 @@ const Order = ({ url, isLogged }) => {
           {/* Left: Image & Items */}
           <div className="flex items-start gap-4 flex-1 w-full">
             <img
-              src={`http://localhost:4000/images/${order.items[0].image}`}
+              src={`${url}/images/${order.items[0].image}`}
               alt="item"
               className="w-20 h-20 rounded object-cover border"
             />
