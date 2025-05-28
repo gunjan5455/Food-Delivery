@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import userModel from "../models/userModel.js";
 
 export const connectDB = async () => {
   await mongoose

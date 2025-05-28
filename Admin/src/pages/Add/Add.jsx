@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Upload } from "lucide-react";
 import axios from "axios";
-const Add = ({ url }) => {
+import { useNavigate } from "react-router-dom";
+const Add = ({ url, isLogged }) => {
+  const navigate = useNavigate();
   //   const url = "http://localhost:4000";
   const [image, setImage] = useState({ file: null, preview: null });
   const [data, setData] = useState({
@@ -56,6 +58,12 @@ const Add = ({ url }) => {
   //   useEffect(() => {
   //     console.log(data);
   //   }, [data]);
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <form className="flex items-center flex-col" onSubmit={onSubmitHandler}>
       <h2 className="text-xl font-semibold mb-4 ">Upload Image</h2>
@@ -146,7 +154,7 @@ const Add = ({ url }) => {
 
       <button
         type="submit"
-        className="bg-orange-500 text-white px-4 py-1 h-10 rounded-lg w-30 hover:bg-orange-400 hover:scale-105"
+        className="bg-orange-500 text-white px-4 py-1 h-10 rounded-lg w-30 cursor-pointer hover:bg-orange-400 hover:scale-105"
       >
         ADD
       </button>

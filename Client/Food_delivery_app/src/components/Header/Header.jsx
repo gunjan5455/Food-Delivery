@@ -15,7 +15,7 @@ const Header = () => {
           mission is to satisfy your cravings and elevate your dining
           experience, one delicious meal at a time.
         </p>
-        <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-2xl hover:bg-orange-400 transition">
+        <button className="bg-orange-500 text-white font-semibold py-2 px-6 rounded-2xl hover:bg-orange-400 transition transform transition-transform duration-200 hover:scale-110">
           View Menu
         </button>
       </div>

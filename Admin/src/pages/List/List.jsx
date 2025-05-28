@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CircleX, SquarePen } from "lucide-react";
-const List = ({ url }) => {
+const List = ({ url, isLogged }) => {
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -47,6 +47,9 @@ const List = ({ url }) => {
 
   useEffect(() => {
     fetchData();
+    if (!isLogged) {
+      navigate("/");
+    }
   }, []);
 
   return (

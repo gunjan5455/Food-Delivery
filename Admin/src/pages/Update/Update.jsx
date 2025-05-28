@@ -3,8 +3,9 @@ import { Upload } from "lucide-react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
-const Update = () => {
+import { useNavigate } from "react-router-dom";
+const Update = ({ isLogged }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const url = "http://localhost:4000";
   const [image, setImage] = useState({ file: null, preview: null });
@@ -46,6 +47,11 @@ const Update = () => {
     fetchData();
   }, [id]);
 
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/");
+    }
+  }, []);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -181,7 +187,7 @@ const Update = () => {
       <button
         type="submit"
         disabled={!originalData}
-        className="bg-orange-500 text-white px-4 py-1 h-10 rounded-lg w-30 hover:bg-orange-400 hover:scale-105 disabled:opacity-50"
+        className="cursor-pointer bg-orange-500 text-white px-4 py-1 h-10 rounded-lg w-30 hover:bg-orange-400 hover:scale-105 disabled:opacity-50"
       >
         UPDATE
       </button>

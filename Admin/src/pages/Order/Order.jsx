@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const Order = ({ url }) => {
+import { useNavigate } from "react-router-dom";
+const Order = ({ url, isLogged }) => {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = async () => {
@@ -37,8 +38,10 @@ const Order = ({ url }) => {
 
   useEffect(() => {
     fetchOrders();
+    if (!isLogged) {
+      navigate("/");
+    }
   }, []);
-
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold mb-6">Order Page</h2>

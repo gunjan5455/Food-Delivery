@@ -42,30 +42,30 @@ const Navbar = () => {
       className="w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md relative"
     >
       <Link to="/">
-        <h1 className="text-3xl font-bold text-orange-500 mb-3">
+        <h1 className="text-3xl font-bold text-orange-500 mb-3 transform transition-transform duration-200 hover:scale-120">
           F00D DELiVERY
         </h1>
       </Link>
 
       <ul className="flex space-x-6 text-gray-700 font-medium">
-        <li className="hover:text-orange-400 cursor-pointer">
+        <li className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120">
           <Link to="/">Home</Link>
         </li>
         <li
           onClick={() => scrollTo(menuRef)}
-          className="hover:text-orange-400 cursor-pointer"
+          className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
         >
           Menu
         </li>
         <li
           onClick={() => scrollTo(contactRef)}
-          className="hover:text-orange-400 cursor-pointer"
+          className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
         >
           Contact Us
         </li>
         <li
           onClick={() => scrollTo(aboutRef)}
-          className="hover:text-orange-400 cursor-pointer"
+          className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
         >
           About
         </li>
@@ -73,16 +73,11 @@ const Navbar = () => {
 
       {token ? (
         <div className="flex items-center space-x-4 relative">
-          <img
-            src={searchIcon}
-            alt="search"
-            className="w-10 h-10 cursor-pointer"
-          />
           <Link to="/cart">
             <img
               src={cartIcon}
               alt="cart"
-              className="w-10 h-10 cursor-pointer"
+              className="w-10 h-10 cursor-pointer transform transition-transform duration-200 hover:scale-120"
             />
           </Link>
 
@@ -91,7 +86,7 @@ const Navbar = () => {
             <img
               src={userIcon}
               alt="user"
-              className="w-10 h-10 rounded-full cursor-pointer"
+              className="w-10 h-10 rounded-full cursor-pointer transform transition-transform duration-200 hover:scale-120"
               onClick={() => setShowDropdown((prev) => !prev)}
             />
 

@@ -13,7 +13,7 @@ const Footer = () => {
           <Link to={"/"}>
             <h2
               ref={aboutRef}
-              className="text-3xl font-bold text-orange-500 mb-3"
+              className="text-3xl font-bold text-orange-500 mb-3 transform transition-transform duration-200 hover:scale-110"
             >
               F00D DELiVERY
             </h2>
@@ -25,13 +25,22 @@ const Footer = () => {
             making it over 2000 years old.
           </p>
           <div className="flex gap-4 mt-4">
-            <a href="#" className="text-white hover:text-orange-500">
+            <a
+              href="#"
+              className="text-white hover:text-orange-500 transform transition-transform duration-200 hover:scale-120"
+            >
               <FaFacebookF />
             </a>
-            <a href="#" className="text-white hover:text-orange-500">
+            <a
+              href="#"
+              className="text-white hover:text-orange-500 transform transition-transform duration-200 hover:scale-120"
+            >
               <FaTwitter />
             </a>
-            <a href="#" className="text-white hover:text-orange-500">
+            <a
+              href="#"
+              className="text-white hover:text-orange-500 transform transition-transform duration-200 hover:scale-120"
+            >
               <FaLinkedinIn />
             </a>
           </div>
@@ -78,7 +87,7 @@ const Footer = () => {
           <Link to={"/"}>
             <span className="text-orange-500">F00D DELiVERY</span>
           </Link>{" "}
-          - All Rights Reserved.
+          - Made by gunjan kotadiya.
         </div>
       </div>
     </footer>
