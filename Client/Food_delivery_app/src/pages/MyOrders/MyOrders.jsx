@@ -29,7 +29,7 @@ const MyOrders = () => {
           {/* Image + Summary */}
           <div className="flex items-start gap-4 flex-1">
             <img
-              src={`http://localhost:4000/images/${order.items[0].image}`}
+              src={`${url}/images/${order.items[0].image}`}
               alt="item"
               className="w-16 h-16 object-cover rounded-md border"
             />
