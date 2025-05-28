@@ -7,7 +7,7 @@ import "dotenv/config";
 import cartRouter from "./routes/cartRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 const app = express();
-// const port = 4000;
+const port = 4000;
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +24,6 @@ app.get("/", (req, res) => {
   res.send("Working");
 });
 
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
