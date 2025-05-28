@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js"; // include `.js` if you're using ES Modules
@@ -45,7 +44,6 @@ const onRegistration = async (req, res) => {
 };
 
 const onLogin = async (req, res) => {
-  console.log("login");
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -74,7 +72,6 @@ const onLogin = async (req, res) => {
       },
       process.env.SECRET
     );
-    console.log(token);
     return res
       .status(201)
       .json({ success: true, message: "sucsessfully login ", token: token });

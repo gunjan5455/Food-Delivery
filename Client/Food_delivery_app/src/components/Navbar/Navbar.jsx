@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import cartIcon from "../../assets/cart.png";
-import searchIcon from "../../assets/food search.png";
 import userIcon from "../../assets/user.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ScrollContext } from "../../context/ScrollContext";
@@ -118,6 +117,15 @@ const Navbar = () => {
         </div>
       ) : (
         <div>
+          <Link
+            to="https://f00d-delivery-react-admin-bygunjan.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
+              Admin
+            </button>
+          </Link>
           <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
             <Link to="/register">sign up</Link>
           </button>

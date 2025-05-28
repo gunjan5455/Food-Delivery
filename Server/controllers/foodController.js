@@ -29,7 +29,6 @@ const addFood = async (req, res) => {
 const foodList = async (req, res) => {
   try {
     const allFoods = await foodModel.find({});
-    console.log("🍽️ Fetching all food items...");
     return res.status(200).send({
       success: true,
       message: "movies have been fetched",
