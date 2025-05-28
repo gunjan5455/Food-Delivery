@@ -60,7 +60,8 @@ const AppWrapper = () => (
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
+  const url = "https://f00d-delivery-mern-bygunjan.onrender.com";
   const location = useLocation();
 
   // Check if current route is login

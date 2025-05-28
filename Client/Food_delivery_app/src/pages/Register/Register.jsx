@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import React, { useContext, useState } from "react";
+
 import registerIcon from "../../assets/register.png";
 import eye from "../../assets/eye.png";
 import eyeoff from "../../assets/eye off.png";
 import { axiosInstance } from "../../calls";
 import { toast } from "react-toastify";
+import { FoodContext } from "../../context/FoodContex";
 const Register = () => {
-  const url = "http://localhost:4000";
+  const { url } = useContext(FoodContext);
+  // const url = "http://localhost:4000";
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     name: "",

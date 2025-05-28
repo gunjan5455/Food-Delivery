@@ -9,7 +9,8 @@ const FoodContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [promoApplied, setPromoApplied] = useState(false);
   const [food_list, setFoodList] = useState([]);
-  const url = "http://localhost:4000";
+  const url = "https://f00d-delivery-mern-bygunjan.onrender.com";
+  //const url = "http://localhost:4000";
   const [token, setToken] = useState("");
 
   const fetchFood = async () => {
