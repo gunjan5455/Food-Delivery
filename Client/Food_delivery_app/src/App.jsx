@@ -10,7 +10,7 @@ import { useState } from "react";
 import Footer from "./components/Footer/Footer";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import { ToastContainer } from "react-toastify";
-import Verify from "./pages/Verify/verify";
+import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
 
 function App() {
