@@ -1,11 +1,12 @@
 import axios from "axios";
 import { axiosInstance } from "../calls";
 import { createContext, useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 export const FoodContext = createContext(null);
 
 const FoodContextProvider = (props) => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState({});
   const [promoApplied, setPromoApplied] = useState(false);
   const [food_list, setFoodList] = useState([]);
@@ -30,19 +31,27 @@ const FoodContextProvider = (props) => {
     loadData();
   }, []);
   const addToCart = async (itemId) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-      toast.success(`item added in your cart`);
+    if (!token) {
+      alert("For that you have to login");
+      navigate("/login");
+      return;
     } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-      toast.success(`item added in your cart`);
-    }
-    if (token) {
-      await axiosInstance.post(
-        url + "/api/cart",
-        { itemId },
-        { headers: { token } }
-      );
+      setCartItems((prev) => ({
+        ...prev,
+        [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
+      }));
+      toast.success("Item added to your cart");
+
+      try {
+        await axiosInstance.post(
+          `${url}/api/cart`,
+          { itemId },
+          { headers: { token } }
+        );
+      } catch (error) {
+        toast.error("Failed to sync with server");
+        console.error(error);
+      }
     }
   };
 

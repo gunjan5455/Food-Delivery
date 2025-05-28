@@ -58,7 +58,7 @@ const Login = ({ isLoggedin, setLoggedin }) => {
               value={data.email}
               onChange={onChangeHandler}
               type="email"
-              placeholder="you@example.com"
+              placeholder="Email"
               className="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -72,7 +72,7 @@ const Login = ({ isLoggedin, setLoggedin }) => {
                 value={data.password}
                 onChange={onChangeHandler}
                 type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
+                placeholder="Password"
                 className="mt-1 w-full px-4 py-2 pr-10 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
