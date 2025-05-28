@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import Login from "./pages/login/Login";
 import Home from "./pages/Home/Home";
@@ -18,29 +18,27 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <BrowserRouter>
-        <Navbar isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/login"
-              element={
-                <Login isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
-              }
-            />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/placeorder" element={<PlaceOrder />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/verify" element={<Verify />} />
-            <Route path="/myorders" element={<MyOrders />} />
-          </Routes>
-          <ToastContainer />
-        </main>
-        <Footer />
-      </BrowserRouter>
+      <Navbar isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <Login isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
+            }
+          />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/placeorder" element={<PlaceOrder />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders />} />
+        </Routes>
+        <ToastContainer />
+      </main>
+      <Footer />
     </div>
   );
 }
