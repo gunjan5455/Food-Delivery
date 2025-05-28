@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register/Register";
-import Login from "./pages/login/login";
+import Login from "./pages/login/Login";
 import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import Navbar from "./components/Navbar/Navbar";
