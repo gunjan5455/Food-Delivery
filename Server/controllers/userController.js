@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js"; // include `.js` if you're using ES Modules
-
+import sendEmail from "../Utilities/NotificationUtilities.js";
+import OTPScript from "../Scripts/OTPScript.js";
 const onRegistration = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -58,7 +59,7 @@ const onLogin = async (req, res) => {
         .status(400)
         .json({ success: false, message: "user doesn't exist." });
     }
-    const isPassword = bcrypt.compareSync(password, user.password);
+    const isPassword = bcrypt.bcrypt.compare(password, user.password);
     if (!isPassword) {
       return res
         .status(400)
@@ -70,7 +71,8 @@ const onLogin = async (req, res) => {
         userId: user._id,
         name: user.name,
       },
-      process.env.SECRET
+      process.env.SECRET,
+      { expiresIn: "1h" }
     );
     return res
       .status(201)
@@ -83,4 +85,83 @@ const onLogin = async (req, res) => {
     });
   }
 };
-export { onRegistration, onLogin };
+
+//
+const onForget = async (req, res) => {
+  const { email } = req.body;
+  try {
+    if (!email) {
+      return res.status(401).send({
+        success: false,
+        message: "Email is missing!",
+      });
+    }
+    let user = await userModel.findOne({ email });
+    if (user == null) {
+      return res.status(404).send({
+        success: false,
+        message: "User doesnot exists with this email Id",
+      });
+    }
+    const otp = otpGenerator();
+    console.log(otp);
+
+    user.otp = otp;
+    user.otpExpiry = Date.now() + 10 * 60 * 1000;
+    await user.save();
+    sendEmail(
+      [user.email],
+      "Reset Password for Book my Show App",
+      OTPScript(user.name, user.email, otp)
+    );
+    return res.status(200).send({
+      status: "success",
+      message: `OTP sent successfully on email Id ${user.email}`,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      success: false,
+      message: "Something went wrong",
+      error: err.message,
+    });
+  }
+};
+const onResetPassword = async (req, res) => {
+  const { otp, password } = req.body;
+  if (!otp || !password) {
+    return res
+      .status(400)
+      .send({ success: false, message: "OTP or Password Missing" });
+  }
+  const user = await userModel.findOne({ otp: otp });
+  if (user == null) {
+    return res.status(404).send({
+      success: false,
+      message: "OTP is incorrect",
+    });
+  }
+  if (Date.now() > user.otpExpiry) {
+    return res.status(404).send({
+      success: false,
+      message: "OTP has been expired",
+    });
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  user.password = hashedPassword;
+  user.otp = null;
+  user.otpExpiry = null;
+
+  await user.save();
+
+  return res.status(200).send({
+    success: true,
+    message: "Password Reset Successful",
+  });
+};
+
+export { onRegistration, onLogin, onForget, onResetPassword };
+function otpGenerator() {
+  return Math.floor(Math.random() * 10000 + 700000);
+}

@@ -12,6 +12,8 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import { ToastContainer } from "react-toastify";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "./pages/ResertPassword/ResetPassword";
 
 function App() {
   const [isLoggedin, setLoggedin] = useState(false);
@@ -35,6 +37,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/forget" element={<ForgetPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
         </Routes>
         <ToastContainer />
       </main>

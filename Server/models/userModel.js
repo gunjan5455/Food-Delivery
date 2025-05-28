@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema(
       type: Object,
       default: {},
     },
+    otp: {
+      type: Number,
+    },
+    otpExpiry: {
+      type: Date,
+    },
   },
   { minimize: false }
 );
