@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Added Link import
+import { useNavigate, Link } from "react-router-dom";
 import loginIcon from "../../assets/login.png";
 import eye from "../../assets/eye.png";
 import eyeoff from "../../assets/eye off.png";
@@ -8,7 +8,7 @@ import { axiosInstance } from "../../calls";
 import { toast } from "react-toastify";
 import { FoodContext } from "../../context/FoodContex";
 
-const Login = ({ isLoggedin, setLoggedin }) => {
+const Login = () => {
   const { url, token, setToken } = useContext(FoodContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);

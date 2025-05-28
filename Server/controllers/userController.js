@@ -59,7 +59,7 @@ const onLogin = async (req, res) => {
         .status(400)
         .json({ success: false, message: "user doesn't exist." });
     }
-    const isPassword = bcrypt.bcrypt.compare(password, user.password);
+    const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
       return res
         .status(400)
@@ -147,7 +147,7 @@ const onResetPassword = async (req, res) => {
     });
   }
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = bcrypt.hashSync(password, salt);
+  const hashedPassword = await bcrypt.hashSync(password, salt);
 
   user.password = hashedPassword;
   user.otp = null;
@@ -163,5 +163,5 @@ const onResetPassword = async (req, res) => {
 
 export { onRegistration, onLogin, onForget, onResetPassword };
 function otpGenerator() {
-  return Math.floor(Math.random() * 10000 + 700000);
+  return Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
 }

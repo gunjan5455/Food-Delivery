@@ -16,21 +16,16 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResertPassword/ResetPassword";
 
 function App() {
-  const [isLoggedin, setLoggedin] = useState(false);
+  // const [isLoggedin, setLoggedin] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
+      <Navbar />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/login"
-            element={
-              <Login isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
-            }
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/placeorder" element={<PlaceOrder />} />
           <Route path="/cart" element={<Cart />} />
