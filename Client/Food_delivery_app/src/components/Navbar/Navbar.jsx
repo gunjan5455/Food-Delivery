@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav
       ref={topRef}
-      className="w-full flex flex-wrap items-center justify-between px-4 py-6 bg-yellow-50 shadow-md"
+      className="w-full flex flex-wrap items-center justify-between px-2 py-4 bg-yellow-50 shadow-md"
     >
       {/* Logo */}
       <Link
@@ -131,16 +131,25 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="space-x-2">
+        <div className="space-x-1">
+          <Link
+            to="https://f00d-delivery-react-admin-bygunjan.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-yellow-50 text-orange-400 border border-orange-400  py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
+              Admin
+            </button>
+          </Link>
           <Link
             to="/register"
-            className="bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-orange-500 transition"
+            className="bg-yellow-50 text-orange-400 border border-orange-400 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2"
           >
             Sign Up
           </Link>
           <Link
             to="/login"
-            className="bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-orange-500 transition"
+            className="bg-yellow-50 text-orange-400 border border-orange-400 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2"
           >
             Sign In
           </Link>
