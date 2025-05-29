@@ -71,8 +71,8 @@ const onLogin = async (req, res) => {
         userId: user._id,
         name: user.name,
       },
-      process.env.SECRET,
-      { expiresIn: "1h" }
+      process.env.SECRET
+      // { expiresIn: "1h" }
     );
     return res
       .status(201)
