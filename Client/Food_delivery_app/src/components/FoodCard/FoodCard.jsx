@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import cartIcon from "../../assets/cart.png";
 // Import ToastContainer
 import { FoodContext } from "../../context/FoodContex";
@@ -9,7 +9,7 @@ const FoodCard = ({ item }) => {
   return (
     <div
       className="w-full max-w-xs bg-white rounded-xl shadow-md overflow-hidden
-           hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-gray-100"
+         hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-gray-100"
     >
       <div className="relative">
         <img

@@ -3,6 +3,7 @@ import { axiosInstance } from "../calls";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 export const FoodContext = createContext(null);
 
 const FoodContextProvider = (props) => {
@@ -13,9 +14,10 @@ const FoodContextProvider = (props) => {
   const url = "https://f00d-delivery-mern-bygunjan.onrender.com";
   //const url = "http://localhost:4000";
   const [token, setToken] = useState("");
-
+  const [loading, setLoading] = useState(true);
   const fetchFood = async () => {
     const response = await axiosInstance.get(url + "/api/food/food");
+    setLoading(false);
     setFoodList(response.data.data);
   };
   useEffect(() => {
@@ -115,6 +117,7 @@ const FoodContextProvider = (props) => {
     url,
     token,
     setToken,
+    loading,
   };
   return (
     <FoodContext.Provider value={contextValue}>
