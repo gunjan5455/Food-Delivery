@@ -137,7 +137,7 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="bg-yellow-50 text-orange-400 border border-orange-400  py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
+            <button className="bg-yellow-50 text-orange-400 border border-orange-400 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
               Admin
             </button>
           </Link>
