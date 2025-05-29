@@ -25,7 +25,6 @@ const Cart = () => {
     [cartItems]
   );
 
-  // Apply promo code
   const handleApplyPromo = () => {
     if (promoCode === "SAVE10") {
       setPromoApplied(true);
@@ -37,7 +36,6 @@ const Cart = () => {
     }
   };
 
-  // Update discounted total whenever cart or promo changes
   useEffect(() => {
     const total = totalAmount();
     if (promoApplied && promoCode === "SAVE10") {
@@ -52,7 +50,7 @@ const Cart = () => {
     (promoApplied && discountedTotal != null ? discountedTotal : subtotal) + 2;
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-4 sm:p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Your Cart</h2>
 
       {isCartEmpty ? (
@@ -61,8 +59,8 @@ const Cart = () => {
         </p>
       ) : (
         <>
-          {/* Table Header */}
-          <div className="grid grid-cols-7 gap-4 bg-gray-100 p-3 rounded font-semibold text-gray-700">
+          {/* Header for larger screens */}
+          <div className="hidden sm:grid grid-cols-7 gap-4 bg-gray-100 p-3 rounded font-semibold text-gray-700 text-sm">
             <p>Item</p>
             <p>Title</p>
             <p>Price</p>
@@ -80,32 +78,34 @@ const Cart = () => {
               return (
                 <div
                   key={item._id}
-                  className="grid grid-cols-7 gap-4 items-center border-b py-4"
+                  className="grid grid-cols-2 sm:grid-cols-7 gap-4 items-center border-b py-4 text-sm"
                 >
                   <img
                     src={url + "/images/" + item.image}
                     alt={item.name}
                     className="w-14 h-14 rounded-full object-cover"
                   />
-                  <p className="text-sm font-medium">{item.name}</p>
-                  <p className="text-sm text-green-600 font-semibold">
+                  <p className="sm:block hidden font-medium">{item.name}</p>
+                  <p className="sm:block hidden text-green-600 font-semibold">
                     ${item.price.toFixed(2)}
                   </p>
-                  <p className="text-sm">{cartItems[item._id]}</p>
-                  <p className="text-sm font-bold">
+                  <p className="text-sm sm:text-center">
+                    Qty: {cartItems[item._id]}
+                  </p>
+                  <p className="font-bold">
                     ${(item.price * cartItems[item._id]).toFixed(2)}
                   </p>
                   <button
                     onClick={() => addToCart(item._id)}
                     className="text-green-500 hover:text-green-700"
                   >
-                    <PlusCircle size={22} />
+                    <PlusCircle size={20} />
                   </button>
                   <button
                     onClick={() => removeFromCart(item._id)}
                     className="text-red-500 hover:text-red-700"
                   >
-                    <MinusCircle size={22} />
+                    <MinusCircle size={20} />
                   </button>
                 </div>
               );
@@ -113,8 +113,8 @@ const Cart = () => {
             return null;
           })}
 
-          {/* Cart Summary + Promo Code */}
-          <div className="grid md:grid-cols-2 gap-10 mt-10 items-start">
+          {/* Cart Summary and Promo Code Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10 items-start">
             {/* Cart Totals */}
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">Cart Totals</h3>
@@ -126,19 +126,16 @@ const Cart = () => {
                 <span>Delivery Fee</span>
                 <span>+$2</span>
               </div>
-
               {promoApplied && (
                 <div className="flex justify-between border-b pb-2 text-green-600">
                   <span>Discount</span>
                   <span>-10%</span>
                 </div>
               )}
-
               <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
-                <span>${finalTotal.toFixed(2) + 2}</span>
+                <span>${finalTotal.toFixed(2)}</span>
               </div>
-
               <button
                 className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded font-semibold shadow"
                 onClick={() => navigate("/placeorder")}
@@ -147,21 +144,21 @@ const Cart = () => {
               </button>
             </div>
 
-            {/* Promo Code */}
+            {/* Promo Code Input */}
             <div>
               <p className="text-gray-600 mb-2">
                 If you have a promo code, enter it here
               </p>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
-                  placeholder='Try "SAVE10" '
+                  placeholder='Try "SAVE10"'
                   type="text"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   className="px-4 py-2 w-full rounded bg-gray-100 focus:outline-none"
                 />
                 <button
-                  className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+                  className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 w-full sm:w-auto"
                   onClick={handleApplyPromo}
                 >
                   Submit

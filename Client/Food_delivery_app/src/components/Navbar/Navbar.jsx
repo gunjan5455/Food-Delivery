@@ -10,8 +10,8 @@ const Navbar = () => {
     useContext(ScrollContext);
   const { token, setToken } = useContext(FoodContext);
   const navigate = useNavigate();
-
   const [showDropdown, setShowDropdown] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
@@ -38,72 +38,87 @@ const Navbar = () => {
   return (
     <nav
       ref={topRef}
-      className="w-full flex items-center justify-between px-6 py-4 bg-yellow-50 shadow-md relative"
+      className="w-full flex flex-wrap items-center justify-between px-4 py-6 bg-yellow-50 shadow-md"
     >
-      <Link to="/">
-        <h1 className="text-3xl font-bold text-orange-500 mb-3 transform transition-transform duration-200 hover:scale-120">
-          F00D DELiVERY
-        </h1>
+      {/* Logo */}
+      <Link
+        to="/"
+        className="text-xl font-bold text-orange-500 sm:text-3xl  cursor-pointer transform transition-transform duration-200 hover:scale-120"
+      >
+        F00D DELiVERY
       </Link>
 
-      <ul className="flex space-x-6 text-gray-700 font-medium">
-        <li className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120">
+      {/* Mobile Menu Toggle */}
+      <button
+        className="sm:hidden text-orange-500 text-2xl"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        ☰
+      </button>
+
+      {/* Menu Items */}
+      <ul
+        className={`${
+          mobileMenuOpen
+            ? "flex flex-col w-full items-start space-y-3 mt-3"
+            : "hidden"
+        } sm:flex sm:flex-row sm:space-x-6 text-gray-700 text-sm sm:text-base`}
+      >
+        <li className="hover:text-orange-400 transform transition-transform duration-200 hover:scale-120">
           <Link to="/">Home</Link>
         </li>
         <li
-          onClick={() => scrollTo(menuRef)}
           className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
+          onClick={() => scrollTo(menuRef)}
         >
           Menu
         </li>
         <li
-          onClick={() => scrollTo(contactRef)}
           className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
+          onClick={() => scrollTo(contactRef)}
         >
           Contact Us
         </li>
         <li
-          onClick={() => scrollTo(aboutRef)}
           className="hover:text-orange-400 cursor-pointer transform transition-transform duration-200 hover:scale-120"
+          onClick={() => scrollTo(aboutRef)}
         >
           About
         </li>
       </ul>
 
+      {/* User Controls */}
       {token ? (
         <div className="flex items-center space-x-4 relative">
           <Link to="/cart">
             <img
               src={cartIcon}
               alt="cart"
-              className="w-10 h-10 cursor-pointer transform transition-transform duration-200 hover:scale-120"
+              className="w-8 h-8 cursor-pointer transition-transform hover:scale-110"
             />
           </Link>
 
-          {/* Profile Dropdown Toggle */}
+          {/* Profile Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <img
               src={userIcon}
               alt="user"
-              className="w-10 h-10 rounded-full cursor-pointer transform transition-transform duration-200 hover:scale-120"
+              className="w-8 h-8 rounded-full cursor-pointer transition-transform hover:scale-110"
               onClick={() => setShowDropdown((prev) => !prev)}
             />
-
             {showDropdown && (
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-50">
+              <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-md z-50">
                 <Link
                   to="/profile"
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={() => setShowDropdown(false)}
                 >
                   Profile
                 </Link>
                 <Link
                   to="/myorders"
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={() => setShowDropdown(false)}
                 >
-                  Order
+                  Orders
                 </Link>
                 <button
                   onClick={handleLogout}
@@ -116,22 +131,19 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="space-x-2">
           <Link
-            to="https://f00d-delivery-react-admin-bygunjan.onrender.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            to="/register"
+            className="bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-orange-500 transition"
           >
-            <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
-              Admin
-            </button>
+            Sign Up
           </Link>
-          <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition m-2">
-            <Link to="/register">sign up</Link>
-          </button>
-          <button className="bg-yellow-50 text-orange-400 border border-gray-300 font-semibold py-2 px-6 rounded-full hover:bg-orange-200 transition">
-            <Link to="/login">sign in</Link>
-          </button>
+          <Link
+            to="/login"
+            className="bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-orange-500 transition"
+          >
+            Sign In
+          </Link>
         </div>
       )}
     </nav>
