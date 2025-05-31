@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-
 import registerIcon from "../../assets/register.png";
 import eye from "../../assets/eye.png";
 import eyeoff from "../../assets/eye off.png";
 import { axiosInstance } from "../../calls";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { FoodContext } from "../../context/FoodContex";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate();
   const { url } = useContext(FoodContext);
   // const url = "http://localhost:4000";
   const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +31,10 @@ const Register = () => {
       });
       console.log(response.data);
       toast.success("Registration successful!");
+      // alert("succsesfully Registerd");
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Registration failed");
@@ -112,6 +117,7 @@ const Register = () => {
             Login
           </a>
         </p>
+        <ToastContainer position="top-center" />
       </div>
     </div>
   );
