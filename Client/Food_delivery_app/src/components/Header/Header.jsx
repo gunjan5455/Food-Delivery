@@ -7,7 +7,7 @@ const Header = () => {
   const { scrollTo, menuRef } = useContext(ScrollContext);
   return (
     <div
-      className="h-[75vh] sm:h-[80vh] w-full max-w-screen-lg bg-cover bg-center flex flex-col sm:flex-row items-center justify-center text-white text-xl px-6 py-10 mx-auto my-10 rounded-2xl"
+      className="h-[45vh] sm:h-[80vh] w-[40vh] lg:w-full max-w-screen-lg bg-cover bg-center flex flex-col sm:flex-row items-center justify-center text-white text-xl px-6 py-10 mx-auto my-10 rounded-2xl"
       style={{ backgroundImage: `url(${pizzaImage})` }}
     >
       <div className="relative z-10 flex-1 p-6 sm:p-10 text-center sm:text-left text-white font-bold">

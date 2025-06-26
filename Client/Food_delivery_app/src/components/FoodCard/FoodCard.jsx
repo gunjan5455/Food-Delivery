@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import cartIcon from "../../assets/cart.png";
 // Import ToastContainer
 import { FoodContext } from "../../context/FoodContex";
-
 const FoodCard = ({ item }) => {
   const { cartItems, addToCart, removeFromCart, url } = useContext(FoodContext);
 
