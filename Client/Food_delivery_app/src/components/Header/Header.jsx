@@ -5,7 +5,10 @@ import { ScrollContext } from "../../context/ScrollContext";
 const Header = () => {
   const { scrollTo, menuRef } = useContext(ScrollContext);
   return (
-    <div style={{ backgroundImage: `url(${pizzaImage})` }}>
+    <div
+      className="h-[45vh] sm:h-[80vh] w-[40vh] lg:w-full max-w-screen-lg bg-cover bg-center flex flex-col sm:flex-row items-center justify-center text-white text-xl px-6 py-10 mx-auto my-10 rounded-2xl"
+      style={{ backgroundImage: `url(${pizzaImage})` }}
+    >
       <div className="relative z-10 flex-1 p-6 sm:p-10 text-center sm:text-left text-white font-bold">
         <h1 className="text-3xl sm:text-5xl font-bold mb-2">Order your</h1>
         <h1 className="text-3xl sm:text-5xl font-bold mb-4">
