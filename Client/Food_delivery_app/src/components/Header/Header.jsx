@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import pizzaImage from "../../assets/food2.jpg";
-
 import { ScrollContext } from "../../context/ScrollContext";
 
 const Header = () => {
